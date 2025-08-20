@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import type { Citation } from '@egregore/shared';
+import type { Citation, SearchResult } from '@egregore/shared';
+import { useStore } from '../store';
 
 export default function SearchManuals() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<Citation[]>([]);
   const [loading, setLoading] = useState(false);
+  const { piUrl } = useStore();
   
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,36 +20,20 @@ export default function SearchManuals() {
     setLoading(true);
     
     try {
-      // In production, this would call the Pi Agent search endpoint
-      // For now, show mock results
-      toast.success('Search functionality coming soon!');
-      
-      // Mock results
-      setResults([
-        {
-          doc_id: 1,
-          title: 'Honeywell Spyder Controller Manual',
-          vendor: 'Honeywell',
-          family: 'Spyder',
-          model: 'PUL6438S',
-          page_start: 14,
-          page_end: 16,
-          snippet: 'BACnet MS/TP configuration requires setting the MAC address and baud rate. The default baud rate is 38400...',
-          score: 0.95
-        },
-        {
-          doc_id: 2,
-          title: 'Johnson Controls VAV Installation Guide',
-          vendor: 'Johnson Controls',
-          family: 'VAV',
-          model: 'TEC2000',
-          page_start: 23,
-          page_end: 24,
-          snippet: 'Actuator troubleshooting: Check power supply (24VAC), verify control signal (2-10VDC), inspect mechanical linkage...',
-          score: 0.88
-        }
-      ]);
+      const response = await fetch(`${piUrl}/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ q: query, k: 8 })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Search failed: ${response.statusText}`);
+      }
+
+      const data: SearchResult = await response.json();
+      setResults(data.results);
     } catch (error) {
+      console.error('Search failed:', error);
       toast.error('Search failed');
     } finally {
       setLoading(false);

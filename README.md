@@ -69,7 +69,7 @@ npm run deploy
 #### 3. Frontend Deployment (Vercel)
 ```bash
 cd apps/frontend
-# Set VITE_WORKER_URL in .env
+# Set VITE_WORKER_URL and VITE_PI_URL in .env
 npm run build
 npm run deploy
 ```
