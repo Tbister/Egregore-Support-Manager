@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egregore - HVAC Support Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-blue-700">
+                        <i class="fas fa-building mr-2"></i>
+                        Egregore HVAC Support Manager
+                    </h1>
+                </div>
+                <nav class="flex space-x-4">
+                    <button onclick="showPage('dashboard')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-700 hover:bg-blue-50">
+                        <i class="fas fa-chart-line mr-1"></i> Dashboard
+                    </button>
+                    <button onclick="showPage('new-ticket')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-700 hover:bg-blue-50">
+                        <i class="fas fa-plus-circle mr-1"></i> New Ticket
+                    </button>
+                    <button onclick="showPage('architecture')" class="nav-btn px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-blue-700 hover:bg-blue-50">
+                        <i class="fas fa-project-diagram mr-1"></i> Architecture
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Dashboard Page -->
+        <div id="dashboard" class="page">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">HVAC Support Dashboard</h2>
+                <p class="text-gray-600">Two-agent AI system for intelligent technical support</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-green-100 rounded-full">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Ready to Send</p>
+                            <p class="text-2xl font-bold text-gray-900">12</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-yellow-100 rounded-full">
+                            <i class="fas fa-clock text-yellow-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Processing</p>
+                            <p class="text-2xl font-bold text-gray-900">3</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-red-100 rounded-full">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Escalated</p>
+                            <p class="text-2xl font-bold text-gray-900">2</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-3 bg-blue-100 rounded-full">
+                            <i class="fas fa-paper-plane text-blue-600"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm text-gray-500">Sent Today</p>
+                            <p class="text-2xl font-bold text-gray-900">28</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Tickets -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div class="px-6 py-4 border-b border-gray-200">
+                    <h3 class="text-lg font-semibold">Recent Tickets</h3>
+                </div>
+                <div class="divide-y divide-gray-200">
+                    <div class="px-6 py-4 hover:bg-gray-50 cursor-pointer" onclick="showTicketDetail()">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="font-medium text-gray-900">Douglas Lighting Controller Pricing</h4>
+                                <p class="text-sm text-gray-600 mt-1">Looking for pricing on Blue Ridge Douglas Lighting Controller...</p>
+                                <div class="flex items-center gap-3 mt-2 text-xs text-gray-500">
+                                    <span><i class="far fa-clock"></i> 2 min ago</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-700 rounded">Ready</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded">Pricing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="font-medium text-gray-900">Spyder Controller BACnet Issue</h4>
+                                <p class="text-sm text-gray-600 mt-1">Getting communication errors on network address 10...</p>
+                                <div class="flex items-center gap-3 mt-2 text-xs text-gray-500">
+                                    <span><i class="far fa-clock"></i> 15 min ago</span>
+                                    <span class="px-2 py-1 bg-yellow-100 text-yellow-700 rounded">Processing</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-700 rounded">Technical</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-6 py-4 hover:bg-gray-50 cursor-pointer">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <h4 class="font-medium text-gray-900">VAV Actuator Not Responding</h4>
+                                <p class="text-sm text-gray-600 mt-1">Johnson Controls VAV box actuator shows offline in Metasys...</p>
+                                <div class="flex items-center gap-3 mt-2 text-xs text-gray-500">
+                                    <span><i class="far fa-clock"></i> 1 hour ago</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-700 rounded">Escalated</span>
+                                    <span class="px-2 py-1 bg-orange-100 text-orange-700 rounded">Urgent</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Ticket Page -->
+        <div id="new-ticket" class="page hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Create New Support Ticket</h2>
+                <p class="text-gray-600">AI-powered analysis and draft generation</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <form onsubmit="handleSubmit(event)">
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Source</label>
+                                <div class="flex gap-4">
+                                    <label class="flex items-center">
+                                        <input type="radio" name="source" value="manual" checked class="mr-2">
+                                        <span>Manual</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="source" value="gmail" class="mr-2">
+                                        <span>Gmail</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="radio" name="source" value="hubspot" class="mr-2">
+                                        <span>HubSpot</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="e.g., VAV Box Troubleshooting">
+                            </div>
+
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Ticket Text *</label>
+                                <textarea id="ticketText" rows="8" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Paste or type the customer inquiry here..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors">
+                                <i class="fas fa-magic mr-2"></i> Process with AI
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1">
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="font-semibold mb-4">Sample Tickets</h3>
+                        <div class="space-y-3">
+                            <button onclick="loadSample(1)" class="w-full text-left p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                                <p class="font-medium text-sm mb-1">Lighting Controller Pricing</p>
+                                <p class="text-xs text-gray-600">Blue Ridge Douglas retrofit kit quote</p>
+                            </button>
+                            <button onclick="loadSample(2)" class="w-full text-left p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                                <p class="font-medium text-sm mb-1">BACnet Configuration</p>
+                                <p class="text-xs text-gray-600">Spyder controller network setup</p>
+                            </button>
+                            <button onclick="loadSample(3)" class="w-full text-left p-3 bg-gray-50 rounded-md hover:bg-gray-100 transition-colors">
+                                <p class="font-medium text-sm mb-1">VAV Actuator Issue</p>
+                                <p class="text-xs text-gray-600">Johnson Controls offline device</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ticket Detail Page -->
+        <div id="ticket-detail" class="page hidden">
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-900">Douglas Lighting Controller Pricing</h2>
+                        <p class="text-sm text-gray-600 mt-1">ID: tk_12345 • Created: 2 min ago • Source: Manual</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">Ready</span>
+                        <span class="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">Pricing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Original Request -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="font-semibold mb-3">Original Request</h3>
+                        <p class="text-gray-700">Looking for pricing on Blue Ridge Douglas Lighting Controller Retro Kit (36 panels, BACnet MS/TP).</p>
+                    </div>
+
+                    <!-- AI Draft -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-semibold">AI-Generated Draft</h3>
+                            <span class="text-sm px-2 py-1 bg-green-100 text-green-700 rounded">✓ Validated</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <p class="text-sm text-gray-500 mb-1">Subject:</p>
+                            <p class="font-medium">RE: Douglas Lighting Controller Retro Kit - Quote Request</p>
+                        </div>
+
+                        <div class="mb-4">
+                            <p class="text-sm text-gray-500 mb-1">Body:</p>
+                            <div class="prose prose-sm text-gray-700">
+                                <p>Thank you for your inquiry about the Blue Ridge Douglas Lighting Controller Retro Kit.</p>
+                                
+                                <p>For your 36-panel BACnet MS/TP configuration, I'll need to confirm a few details to provide accurate pricing:</p>
+                                
+                                <ul>
+                                    <li>Current Douglas controller model number</li>
+                                    <li>Required I/O points per panel</li>
+                                    <li>MS/TP baud rate preference (9600, 19200, 38400, or 76800)</li>
+                                </ul>
+                                
+                                <p>The standard retro kit includes:</p>
+                                <ul>
+                                    <li>BACnet MS/TP communication module</li>
+                                    <li>Panel interface cards (up to 40 panels supported)</li>
+                                    <li>Network isolation components</li>
+                                    <li>Installation documentation</li>
+                                </ul>
+                                
+                                <p>Typical lead time is 2-3 weeks. Installation support available.</p>
+                                
+                                <p>Please confirm the above details for a formal quote.</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <p class="text-sm text-gray-500 mb-1">Citations:</p>
+                            <ul class="text-sm text-gray-600">
+                                <li>• [Blue Ridge Douglas Retrofit Manual Rev.3, pp.12-15]</li>
+                                <li>• [BACnet MS/TP Integration Guide, pp.23-24]</li>
+                            </ul>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button class="bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition-colors">
+                                <i class="fas fa-paper-plane mr-2"></i> Send Email
+                            </button>
+                            <button class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors">
+                                <i class="fas fa-edit mr-2"></i> Edit Draft
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="space-y-6">
+                    <!-- AI Analysis -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="font-semibold mb-3">AI Analysis</h3>
+                        <dl class="space-y-2 text-sm">
+                            <div>
+                                <dt class="text-gray-500">Category:</dt>
+                                <dd class="font-medium">Pricing</dd>
+                            </div>
+                            <div>
+                                <dt class="text-gray-500">Products:</dt>
+                                <dd>Douglas Lighting Controller</dd>
+                            </div>
+                            <div>
+                                <dt class="text-gray-500">Quantity:</dt>
+                                <dd>36 panels</dd>
+                            </div>
+                            <div>
+                                <dt class="text-gray-500">Protocols:</dt>
+                                <dd>BACnet MS/TP</dd>
+                            </div>
+                            <div>
+                                <dt class="text-gray-500">Priority:</dt>
+                                <dd class="text-yellow-600">Medium</dd>
+                            </div>
+                            <div>
+                                <dt class="text-gray-500">Missing Info:</dt>
+                                <dd>
+                                    <ul class="mt-1">
+                                        <li>• Model number</li>
+                                        <li>• I/O requirements</li>
+                                        <li>• Baud rate</li>
+                                    </ul>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <!-- Manual References -->
+                    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                        <h3 class="font-semibold mb-3">Manual References</h3>
+                        <div class="space-y-3 text-sm">
+                            <div>
+                                <p class="font-medium">Douglas Retrofit Manual</p>
+                                <p class="text-gray-500 text-xs">Pages 12-15</p>
+                                <p class="text-gray-600 mt-1 text-xs">Covers BACnet MS/TP integration...</p>
+                            </div>
+                            <div>
+                                <p class="font-medium">BACnet Integration Guide</p>
+                                <p class="text-gray-500 text-xs">Pages 23-24</p>
+                                <p class="text-gray-600 mt-1 text-xs">Network configuration parameters...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Architecture Page -->
+        <div id="architecture" class="page hidden">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">System Architecture</h2>
+                <p class="text-gray-600">Two-agent deterministic AI system for HVAC support</p>
+            </div>
+
+            <!-- Architecture Diagram -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 mb-8">
+                <h3 class="text-xl font-semibold mb-6">Data Flow</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div class="text-center">
+                        <div class="bg-blue-100 rounded-lg p-6 mb-2">
+                            <i class="fas fa-envelope text-3xl text-blue-600"></i>
+                        </div>
+                        <p class="font-medium">Ticket Intake</p>
+                        <p class="text-xs text-gray-600 mt-1">Email/Manual/API</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-100 rounded-lg p-6 mb-2">
+                            <i class="fas fa-robot text-3xl text-purple-600"></i>
+                        </div>
+                        <p class="font-medium">Pi Agent (SLM)</p>
+                        <p class="text-xs text-gray-600 mt-1">Parse & Search</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-100 rounded-lg p-6 mb-2">
+                            <i class="fas fa-brain text-3xl text-green-600"></i>
+                        </div>
+                        <p class="font-medium">LLM (GPT-4)</p>
+                        <p class="text-xs text-gray-600 mt-1">Draft Generation</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-orange-100 rounded-lg p-6 mb-2">
+                            <i class="fas fa-check-double text-3xl text-orange-600"></i>
+                        </div>
+                        <p class="font-medium">Validation</p>
+                        <p class="text-xs text-gray-600 mt-1">Fact Checking</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-indigo-100 rounded-lg p-6 mb-2">
+                            <i class="fas fa-paper-plane text-3xl text-indigo-600"></i>
+                        </div>
+                        <p class="font-medium">Response</p>
+                        <p class="text-xs text-gray-600 mt-1">Send/Escalate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="font-semibold mb-4"><i class="fas fa-microchip text-purple-600 mr-2"></i>Pi Agent (Raspberry Pi)</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>• <strong>Runtime:</strong> Node.js + Hono</li>
+                        <li>• <strong>Database:</strong> SQLite + FTS5</li>
+                        <li>• <strong>Models:</strong> Phi3, Qwen2.5</li>
+                        <li>• <strong>Embeddings:</strong> Nomic (384d)</li>
+                        <li>• <strong>Endpoints:</strong> /parse, /search, /validate</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="font-semibold mb-4"><i class="fas fa-cloud text-blue-600 mr-2"></i>Worker (Cloudflare)</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>• <strong>Framework:</strong> Hono</li>
+                        <li>• <strong>Storage:</strong> KV + R2</li>
+                        <li>• <strong>LLM:</strong> OpenAI GPT-4</li>
+                        <li>• <strong>Edge:</strong> Global deployment</li>
+                        <li>• <strong>API:</strong> REST + JSON</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                    <h3 class="font-semibold mb-4"><i class="fas fa-desktop text-green-600 mr-2"></i>Frontend (React)</h3>
+                    <ul class="space-y-2 text-sm text-gray-700">
+                        <li>• <strong>Framework:</strong> React 18</li>
+                        <li>• <strong>Styling:</strong> Tailwind CSS</li>
+                        <li>• <strong>State:</strong> Zustand</li>
+                        <li>• <strong>Routing:</strong> React Router</li>
+                        <li>• <strong>Deploy:</strong> Vercel/CDN</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Features -->
+            <div class="mt-8 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8">
+                <h3 class="text-xl font-semibold mb-4">Key Features</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-medium">Deterministic JSON Output</p>
+                            <p class="text-sm text-gray-600">Temperature=0, strict schemas, validation</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-medium">Hybrid Search</p>
+                            <p class="text-sm text-gray-600">60% FTS + 40% VSS weighted scoring</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-medium">Citation System</p>
+                            <p class="text-sm text-gray-600">All claims backed by manual references</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-check-circle text-green-600 mt-1 mr-3"></i>
+                        <div>
+                            <p class="font-medium">Smart Validation</p>
+                            <p class="text-sm text-gray-600">Cross-check technical claims</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Page navigation
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Update nav buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-700', 'text-white');
+                btn.classList.add('text-gray-700');
+            });
+            event.target.classList.remove('text-gray-700');
+            event.target.classList.add('bg-blue-700', 'text-white');
+        }
+
+        function showTicketDetail() {
+            showPage('ticket-detail');
+        }
+
+        function loadSample(id) {
+            const samples = {
+                1: {
+                    subject: 'Douglas Lighting Controller Retro Kit',
+                    text: 'Looking for pricing on Blue Ridge Douglas Lighting Controller Retro Kit (36 panels, BACnet MS/TP).'
+                },
+                2: {
+                    subject: 'Spyder Controller Configuration',
+                    text: 'Need help configuring Honeywell Spyder controller for BACnet IP. Getting communication errors on network address 10. Running firmware version 3.2.'
+                },
+                3: {
+                    subject: 'VAV Box Actuator Issue',
+                    text: 'Johnson Controls VAV box actuator not responding. Model NAE5510, shows offline in Metasys. Need troubleshooting steps and possible replacement part numbers.'
+                }
+            };
+            
+            const sample = samples[id];
+            document.getElementById('subject').value = sample.subject;
+            document.getElementById('ticketText').value = sample.text;
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('In production, this would process the ticket through the AI pipeline:\n1. Parse (Pi Agent)\n2. Search manuals\n3. Generate draft (GPT-4)\n4. Validate claims\n5. Show results');
+            showPage('ticket-detail');
+        }
+    </script>
+</body>
+</html>
