@@ -1,0 +1,30 @@
+[Unit]
+Description=Egregore Pi Agent - HVAC Support SLM Service
+After=network.target ollama.service
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/egregore/apps/pi-agent
+Environment="NODE_ENV=production"
+Environment="PORT=8080"
+Environment="OLLAMA_URL=http://localhost:11434"
+Environment="DB_PATH=/data/manuals/manuals.db"
+Environment="EMBED_MODEL=nomic-embed-text"
+Environment="IE_MODEL=phi3:mini"
+Environment="VEC_DIM=384"
+Environment="LOG_LEVEL=info"
+ExecStartPre=/usr/bin/npm run build
+ExecStart=/usr/bin/node dist/index.js
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/pi-agent/output.log
+StandardError=append:/var/log/pi-agent/error.log
+
+# Resource limits
+LimitNOFILE=65536
+MemoryLimit=1G
+CPUQuota=50%
+
+[Install]
+WantedBy=multi-user.target

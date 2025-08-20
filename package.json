@@ -1,0 +1,29 @@
+{
+  "name": "egregore",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HVAC Support Manager - Two-agent production system",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "pnpm run --parallel dev",
+    "build": "pnpm run -r build",
+    "test": "pnpm run -r test",
+    "deploy:worker": "cd apps/worker && npm run deploy",
+    "deploy:frontend": "cd apps/frontend && npm run deploy",
+    "deploy:pi": "cd apps/pi-agent && npm run deploy",
+    "lint": "pnpm run -r lint",
+    "typecheck": "pnpm run -r typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

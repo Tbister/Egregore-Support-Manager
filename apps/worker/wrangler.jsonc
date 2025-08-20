@@ -1,0 +1,24 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "egregore-worker",
+  "compatibility_date": "2024-01-01",
+  "pages_build_output_dir": "./dist",
+  "compatibility_flags": ["nodejs_compat"],
+  
+  // KV namespace for ticket storage
+  "kv_namespaces": [
+    {
+      "binding": "TICKETS",
+      "id": "tickets_kv_id",
+      "preview_id": "tickets_kv_preview_id"
+    }
+  ],
+  
+  // R2 bucket for manual storage (optional)
+  "r2_buckets": [
+    {
+      "binding": "MANUALS",
+      "bucket_name": "hvac-manuals"
+    }
+  ]
+}

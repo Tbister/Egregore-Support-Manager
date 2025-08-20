@@ -1,0 +1,69 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.wrangler/
+.vercel/
+.next/
+out/
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+.dev.vars
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Testing
+coverage/
+.nyc_output/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+manuals-*.db
+
+# PM2
+.pm2/
+ecosystem.config.js
+
+# Backups
+*.backup
+*.bak
+*.tar.gz
+*.zip
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Pi specific
+/apps/pi-agent/data/
+/apps/pi-agent/models/
